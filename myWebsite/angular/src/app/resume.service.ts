@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { getSquare } from '../../../tester.js';
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+}
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ResumeService {
-  constructor() { }
+
+  name: string;
+
+  constructor(private http: HttpClient) { }
+
   showTodayDate(){
     let ndate = new Date();
     return ndate;
@@ -17,6 +25,11 @@ export class ResumeService {
 
   getASquare(x){
     return getSquare(x);
+  }
+
+  getResume(name){
+    return this.http.post('http://localhost:3000/resume/'+name,httpOptions);
+
   }
   
 }

@@ -1,14 +1,14 @@
-import express, { static } from 'express';
+const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use(static('public')); //for css file
+//app.use(static('public')); //for css file
 app.set('view engine', 'ejs');
 
 app.get('/', function(req,res){
-	res.render('index');
+	//res.render('index');
 });
 
 app.route('/resume/:name').get((req,res) =>{
