@@ -27,8 +27,8 @@ export class ResumeService {
     return getSquare(x);
   }
 
-  getResume(name){
-    return this.http.post('http://localhost:3000/resume/'+name,httpOptions);
+  getResume(user){
+    return this.http.post('http://localhost:3000/resume', user, httpOptions);
 
   }
   
