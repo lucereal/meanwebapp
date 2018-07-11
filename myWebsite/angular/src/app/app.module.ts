@@ -7,6 +7,7 @@ import { RouterModule, Routes} from '@angular/router';
 import { AppComponent } from './app.component';
 import { ResumeService } from './resume.service';
 import { ResumeComponent } from './resume/resume.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 const appRoutes: Routes = [
   {path: 'resume', component: ResumeComponent }
@@ -15,7 +16,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ResumeComponent
+    ResumeComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
