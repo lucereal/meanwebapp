@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ResumeService } from '../resume.service';
+import { ResumeService } from '../services/resume.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

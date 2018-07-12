@@ -5,19 +5,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes} from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { ResumeService } from './resume.service';
 import { ResumeComponent } from './resume/resume.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+
+import { ResumeService } from './services/resume.service';
+import { ValidateService } from './services/validate.service';
+import { AuthenticateService } from './services/authenticate.service';
 
 const appRoutes: Routes = [
-  {path: 'resume', component: ResumeComponent }
+  {path: 'resume', component: ResumeComponent },
+  {path: '', component:HomeComponent},
+  {path: 'register', component: RegisterComponent}
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     ResumeComponent,
-    SidebarComponent
+    SidebarComponent,
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +35,9 @@ const appRoutes: Routes = [
     FormsModule
   ],
   providers: [
-    ResumeService
+    ResumeService,
+    ValidateService,
+    AuthenticateService
   ],
   bootstrap: [AppComponent]
 })

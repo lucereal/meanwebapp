@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { getSquare } from '../../../tester.js';
+import { getSquare } from '../../../../tester.js';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -31,5 +31,7 @@ export class ResumeService {
     return this.http.post('http://localhost:3000/resume', user, httpOptions);
 
   }
+
+  
   
 }
