@@ -32,6 +32,9 @@ export class ResumeService {
 
   }
 
+  registerUser(user){
+    return this.http.post('http:localhost:3000/register', user, httpOptions);
+  }
   
   
 }
