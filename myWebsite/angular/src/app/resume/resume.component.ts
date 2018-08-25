@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResumeService } from '../services/resume.service';
 import { ActivatedRoute } from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-resume',
@@ -9,33 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ResumeComponent implements OnInit {
 
-  todaysDate;
-  square;
-  name;
-  resume;
-  school;
-  data;
-  gpa;
-  constructor(private resumeservice: ResumeService) { }
+username;
+  constructor(private router: Router, private actRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.todaysDate = this.resumeservice.showTodayDate();
-    this.square = this.resumeservice.getASquare(4);
+    
   }
 
-  onRegisterSubmit(){
-     const user = {
-      name: this.name
-    }
-    //this.route.params.subscribe(params => this.name = params.name);
-    
-    this.resumeservice.getResume(user).subscribe(
-      data => { console.log(data);
-        this.data = data;
-        
-        this.school = this.data.resume.school;
-        this.gpa = this.data.resume.gpa;
-       }//end data =>
-    )
-  }
+
+
 }

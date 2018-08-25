@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   name: String;
   school: String;
   gpa: String;
-  success;
+  password;
 
   constructor(
     private authservice: AuthenticateService,
@@ -28,7 +28,8 @@ export class RegisterComponent implements OnInit {
     const user = {
       name: this.name,
       school: this.school,
-      gpa: this.gpa
+      gpa: this.gpa,
+      password: this.password
     }
     
     

@@ -15,8 +15,12 @@ const UserSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	gpa: {
+		type: Number
+	},
 	password: {
-		type: Number,
+		type: String,
+		required: true
 
 	}
 });
@@ -66,6 +70,16 @@ function createNewUser(user) {
 	});
 }
 
+function search(user) {
+	const query = { name: user.name, password: user.password };
+	return new Promise(function (resolve, reject) {
+		User.findOne(query).then(data => {
+			resolve(data);
+		}).catch(err => {
+			reject(Error('It broke'));
+		})
+	})
+}
 const users = require('./routes/users');
 
 //Middleware
@@ -84,28 +98,38 @@ app.get('/', function (req, res) {
 	app.send('invlalid endpoint');
 });
 
-app.route('/resume').get((req, res, next) => {
+app.route('/login').get((req, res, next) => {
 	//const requestedResumeName = req.body.name;
 	res.json({
-		success: true,
-		resume: {
-			name: "dav",
-			school: "Texas Tech University",
-			gpa: 3.5
-		}
+		success: true
 	});
 })
-app.route('/resume').post((req, res) => {
-	const requestedResumeName = req.body.name;
-	console.log(req.body.name);
-	res.json({
-		success: true,
-		resume: {
-			name: requestedResumeName,
-			school: "Texas Tech University",
-			gpa: 3.5
+app.route('/login').post((req, res) => {
+	const requestedUsername = req.body.username;
+	const requestedPassword = req.body.password
+
+	let user = {
+		name: requestedUsername,
+		password: requestedPassword
+	}
+	console.log(req.body.username);
+	console.log(req.body.password);
+
+	search(user).then(data => {
+		console.log(data);
+		if (data) {
+			res.json({ success: true, 
+				msg: "login success, found user: " + data.name,
+			user:data})
+		} else {
+			res.json({ success: false, msg: err })
 		}
-	});
+
+	}).catch(err => {
+		//console.log(err);
+		res.json({ success: false, msg: "unknown error, could not search in db" })
+	})
+
 
 })
 
@@ -114,33 +138,34 @@ app.route('/register').post((req, res) => {
 	const name = req.body.name;
 	const school = req.body.school;
 	const gpa = req.body.gpa;
+	const password = req.body.password;
 	// console.log(req.body.name);
 	// console.log(school);
 	// console.log(gpa);
 	let user = {
 		name: name,
 		school: school,
-		gpa: gpa
+		gpa: gpa,
+		password: password
 	}
 
-	getUserByUsername(name).then(data => {
+	search(user).then(data => {
 
 		if (data) {
-			//console.log("Found user: \n" + data);
-			res.json({success:false,msg:"user already exists"})
+			res.json({ success: false, msg: "user already exists" })
 		} else {
 			createNewUser(user).then(data => {
 				//console.log(data);
-				res.json({success:true, msg:data})
+				res.json({ success: true, msg: data })
 			}).catch(err => {
 				//console.log(err);
-				res.json({success:false, msg:err})
+				res.json({ success: false, msg: err })
 			})
 		}
 
-	}).catch(err =>{
+	}).catch(err => {
 		console.log(err);
-		res.json({success:false,msg:"unknown error, could not getUserbyUsername in db"})
+		res.json({ success: false, msg: "unknown error, could not getUserbyUsername in db" })
 	})
 
 }); //end post('register')

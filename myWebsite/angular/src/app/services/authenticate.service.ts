@@ -15,6 +15,11 @@ export class AuthenticateService {
 
   user:any;
 
+  login(user){
+    return this.http.post('http://localhost:3000/login', user, httpOptions);
+
+  }
+
   registerUser(user){
 
     return this.http.post('http://localhost:3000/register', user, httpOptions);

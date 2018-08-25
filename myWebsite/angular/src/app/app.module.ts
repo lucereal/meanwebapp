@@ -13,11 +13,13 @@ import { RegisterComponent } from './register/register.component';
 import { ResumeService } from './services/resume.service';
 import { ValidateService } from './services/validate.service';
 import { AuthenticateService } from './services/authenticate.service';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   {path: 'resume', component: ResumeComponent },
   {path: '', component:HomeComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent}
 ]
 
 @NgModule({
@@ -26,13 +28,14 @@ const appRoutes: Routes = [
     ResumeComponent,
     SidebarComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     ResumeService,
