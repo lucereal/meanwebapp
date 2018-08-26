@@ -10,6 +10,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 
+import { DataService } from './services/data.service';
 import { ResumeService } from './services/resume.service';
 import { ValidateService } from './services/validate.service';
 import { AuthenticateService } from './services/authenticate.service';
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
   providers: [
     ResumeService,
     ValidateService,
-    AuthenticateService
+    AuthenticateService,
+    DataService
   ],
   bootstrap: [AppComponent]
 })
